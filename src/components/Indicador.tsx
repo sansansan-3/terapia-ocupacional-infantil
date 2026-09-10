@@ -16,7 +16,7 @@ export function Indicador({
       </span>
       <span className="min-w-0">
         <span className="block font-display text-2xl font-bold leading-none">{valor}</span>
-        <span className="mt-1 block truncate text-sm text-muted-foreground">{etiqueta}</span>
+        <span className="mt-1 block text-sm leading-snug text-muted-foreground">{etiqueta}</span>
       </span>
     </div>
   );
