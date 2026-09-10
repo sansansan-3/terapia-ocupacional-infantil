@@ -35,6 +35,7 @@ export function FichaDinamica({ dinamica, onCerrar }: Props) {
       if (focusables.length === 0) return;
       const primero = focusables[0];
       const ultimo = focusables[focusables.length - 1];
+      if (!primero || !ultimo) return;
       if (e.shiftKey && document.activeElement === primero) {
         e.preventDefault();
         ultimo.focus();
