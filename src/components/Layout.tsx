@@ -18,7 +18,10 @@ export function Layout({ children }: { children: ReactNode }) {
 
   const buscar = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate({ to: "/dinamicas", search: { q: consulta, p: 1 } });
+    navigate({
+      to: "/dinamicas",
+      search: { q: consulta, cat: "", edad: 0, dif: "", hab: "", orden: "titulo-asc", p: 1 },
+    });
   };
 
   return (

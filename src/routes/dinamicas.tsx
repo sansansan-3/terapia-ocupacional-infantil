@@ -22,13 +22,13 @@ interface BusquedaCatalogo {
 
 export const Route = createFileRoute("/dinamicas")({
   validateSearch: (search: Record<string, unknown>): BusquedaCatalogo => ({
-    q: typeof search.q === "string" ? search.q : "",
-    cat: typeof search.cat === "string" ? search.cat : "",
-    edad: Number(search.edad) > 0 ? Number(search.edad) : 0,
-    dif: typeof search.dif === "string" ? search.dif : "",
-    hab: typeof search.hab === "string" ? search.hab : "",
-    orden: typeof search.orden === "string" ? search.orden : "titulo-asc",
-    p: Number(search.p) > 0 ? Number(search.p) : 1,
+    q: typeof search["q"] === "string" ? search["q"] : "",
+    cat: typeof search["cat"] === "string" ? search["cat"] : "",
+    edad: Number(search["edad"]) > 0 ? Number(search["edad"]) : 0,
+    dif: typeof search["dif"] === "string" ? search["dif"] : "",
+    hab: typeof search["hab"] === "string" ? search["hab"] : "",
+    orden: typeof search["orden"] === "string" ? search["orden"] : "titulo-asc",
+    p: Number(search["p"]) > 0 ? Number(search["p"]) : 1,
   }),
   head: () => ({
     meta: [

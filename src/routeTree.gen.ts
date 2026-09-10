@@ -10,33 +10,79 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AcercaDeRouteImport } from './routes/acerca-de'
+import { Route as CategoriasRouteImport } from './routes/categorias'
+import { Route as DinamicasRouteImport } from './routes/dinamicas'
+import { Route as FavoritosRouteImport } from './routes/favoritos'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AcercaDeRoute = AcercaDeRouteImport.update({
+  id: '/acerca-de',
+  path: '/acerca-de',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriasRoute = CategoriasRouteImport.update({
+  id: '/categorias',
+  path: '/categorias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DinamicasRoute = DinamicasRouteImport.update({
+  id: '/dinamicas',
+  path: '/dinamicas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FavoritosRoute = FavoritosRouteImport.update({
+  id: '/favoritos',
+  path: '/favoritos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/acerca-de': typeof AcercaDeRoute
+  '/categorias': typeof CategoriasRoute
+  '/dinamicas': typeof DinamicasRoute
+  '/favoritos': typeof FavoritosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/acerca-de': typeof AcercaDeRoute
+  '/categorias': typeof CategoriasRoute
+  '/dinamicas': typeof DinamicasRoute
+  '/favoritos': typeof FavoritosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/acerca-de': typeof AcercaDeRoute
+  '/categorias': typeof CategoriasRoute
+  '/dinamicas': typeof DinamicasRoute
+  '/favoritos': typeof FavoritosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/acerca-de' | '/categorias' | '/dinamicas' | '/favoritos'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/acerca-de' | '/categorias' | '/dinamicas' | '/favoritos'
+  id:
+    | '__root__'
+    | '/'
+    | '/acerca-de'
+    | '/categorias'
+    | '/dinamicas'
+    | '/favoritos'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AcercaDeRoute: typeof AcercaDeRoute
+  CategoriasRoute: typeof CategoriasRoute
+  DinamicasRoute: typeof DinamicasRoute
+  FavoritosRoute: typeof FavoritosRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +94,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/acerca-de': {
+      id: '/acerca-de'
+      path: '/acerca-de'
+      fullPath: '/acerca-de'
+      preLoaderRoute: typeof AcercaDeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categorias': {
+      id: '/categorias'
+      path: '/categorias'
+      fullPath: '/categorias'
+      preLoaderRoute: typeof CategoriasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dinamicas': {
+      id: '/dinamicas'
+      path: '/dinamicas'
+      fullPath: '/dinamicas'
+      preLoaderRoute: typeof DinamicasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/favoritos': {
+      id: '/favoritos'
+      path: '/favoritos'
+      fullPath: '/favoritos'
+      preLoaderRoute: typeof FavoritosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AcercaDeRoute: AcercaDeRoute,
+  CategoriasRoute: CategoriasRoute,
+  DinamicasRoute: DinamicasRoute,
+  FavoritosRoute: FavoritosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
