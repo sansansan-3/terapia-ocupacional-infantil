@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Home, Sparkles, LayoutGrid, Heart, Info, Search } from "lucide-react";
+import { Home, Sparkles, LayoutGrid, Heart, Info, Search, LogOut } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { useFavoritos } from "@/lib/favoritos";
+import { useAcceso } from "@/lib/acceso";
 
 const ENLACES = [
   { to: "/", etiqueta: "Inicio", icono: Home, exacto: true },
@@ -15,6 +16,7 @@ export function Layout({ children }: { children: ReactNode }) {
   const [consulta, setConsulta] = useState("");
   const navigate = useNavigate();
   const { total } = useFavoritos();
+  const { salir } = useAcceso();
 
   const buscar = (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,9 +58,19 @@ export function Layout({ children }: { children: ReactNode }) {
           ))}
         </nav>
 
-        <p className="mt-auto px-3 text-xs leading-relaxed text-muted-foreground">
-          Material de apoyo para la planificación de actividades.
-        </p>
+        <div className="mt-auto px-3">
+          <button
+            type="button"
+            onClick={salir}
+            className="flex items-center gap-2 text-xs font-semibold text-muted-foreground transition-colors hover:text-primary"
+          >
+            <LogOut className="h-4 w-4" aria-hidden="true" />
+            Salir
+          </button>
+          <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+            Material de apoyo para la planificación de actividades.
+          </p>
+        </div>
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
@@ -89,6 +101,14 @@ export function Layout({ children }: { children: ReactNode }) {
                   />
                 </div>
               </form>
+              <button
+                type="button"
+                onClick={salir}
+                aria-label="Salir"
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-border text-muted-foreground transition-colors hover:text-primary lg:hidden"
+              >
+                <LogOut className="h-4 w-4" aria-hidden="true" />
+              </button>
             </div>
           </div>
         </header>

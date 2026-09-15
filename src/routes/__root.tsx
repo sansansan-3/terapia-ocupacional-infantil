@@ -4,6 +4,8 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useNavigate,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -12,6 +14,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ProveedorFavoritos } from "../lib/favoritos";
+import { ProveedorAcceso, useAcceso } from "../lib/acceso";
 import { Layout } from "../components/Layout";
 
 function NotFoundComponent() {
@@ -119,16 +122,38 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+function Guardia() {
+  const { tieneAcceso, cargado } = useAcceso();
+  const navigate = useNavigate();
+  const ruta = useRouterState({ select: (s) => s.location.pathname });
+  const enAcceso = ruta === "/acceso";
+
+  useEffect(() => {
+    if (cargado && !tieneAcceso && !enAcceso) {
+      navigate({ to: "/acceso", replace: true });
+    }
+  }, [cargado, tieneAcceso, enAcceso, navigate]);
+
+  if (enAcceso) return <Outlet />;
+  if (!cargado || !tieneAcceso) return <div className="min-h-screen bg-background" />;
+
+  return (
+    <Layout>
+      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+      <Outlet />
+    </Layout>
+  );
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
       <ProveedorFavoritos>
-        <Layout>
-          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-          <Outlet />
-        </Layout>
+        <ProveedorAcceso>
+          <Guardia />
+        </ProveedorAcceso>
       </ProveedorFavoritos>
     </QueryClientProvider>
   );
