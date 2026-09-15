@@ -16,6 +16,7 @@ export function Layout({ children }: { children: ReactNode }) {
   const [consulta, setConsulta] = useState("");
   const navigate = useNavigate();
   const { total } = useFavoritos();
+  const { salir } = useAcceso();
 
   const buscar = (e: React.FormEvent) => {
     e.preventDefault();
