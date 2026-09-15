@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Home, Sparkles, LayoutGrid, Heart, Info, Search } from "lucide-react";
+import { Home, Sparkles, LayoutGrid, Heart, Info, Search, LogOut } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { useFavoritos } from "@/lib/favoritos";
+import { useAcceso } from "@/lib/acceso";
 
 const ENLACES = [
   { to: "/", etiqueta: "Inicio", icono: Home, exacto: true },
