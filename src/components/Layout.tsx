@@ -101,6 +101,14 @@ export function Layout({ children }: { children: ReactNode }) {
                   />
                 </div>
               </form>
+              <button
+                type="button"
+                onClick={salir}
+                aria-label="Salir"
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-border text-muted-foreground transition-colors hover:text-primary lg:hidden"
+              >
+                <LogOut className="h-4 w-4" aria-hidden="true" />
+              </button>
             </div>
           </div>
         </header>
