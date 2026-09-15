@@ -56,9 +56,19 @@ export function Layout({ children }: { children: ReactNode }) {
           ))}
         </nav>
 
-        <p className="mt-auto px-3 text-xs leading-relaxed text-muted-foreground">
-          Material de apoyo para la planificación de actividades.
-        </p>
+        <div className="mt-auto px-3">
+          <button
+            type="button"
+            onClick={salir}
+            className="flex items-center gap-2 text-xs font-semibold text-muted-foreground transition-colors hover:text-primary"
+          >
+            <LogOut className="h-4 w-4" aria-hidden="true" />
+            Salir
+          </button>
+          <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+            Material de apoyo para la planificación de actividades.
+          </p>
+        </div>
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">

@@ -4,6 +4,8 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useNavigate,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -12,6 +14,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ProveedorFavoritos } from "../lib/favoritos";
+import { ProveedorAcceso, useAcceso } from "../lib/acceso";
 import { Layout } from "../components/Layout";
 
 function NotFoundComponent() {
