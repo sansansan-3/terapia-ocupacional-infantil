@@ -1,7 +1,9 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 import { Sparkles, Loader2 } from "lucide-react";
 import { useAcceso, normalizarCorreo, correoValido } from "@/lib/acceso";
+import { verificarCompra } from "@/lib/acceso.functions";
 
 export const Route = createFileRoute("/acceso")({
   head: () => ({
@@ -24,6 +26,7 @@ export const Route = createFileRoute("/acceso")({
 
 function Acceso() {
   const { tieneAcceso, cargado, registrarAcceso } = useAcceso();
+  const comprobar = useServerFn(verificarCompra);
   const navigate = useNavigate();
   const [correo, setCorreo] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -48,6 +51,14 @@ function Acceso() {
     setError(null);
     setEnviando(true);
     try {
+      const { acceso } = await comprobar({ data: { email: limpio } });
+      if (!acceso) {
+        setError(
+          "No encontramos una compra asociada a este correo. Utiliza el mismo correo con el que realizaste la compra.",
+        );
+        setEnviando(false);
+        return;
+      }
       registrarAcceso();
       navigate({ to: "/", replace: true });
     } catch {
