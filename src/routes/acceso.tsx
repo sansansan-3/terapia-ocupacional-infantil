@@ -26,6 +26,7 @@ export const Route = createFileRoute("/acceso")({
 
 function Acceso() {
   const { tieneAcceso, cargado, registrarAcceso } = useAcceso();
+  const comprobar = useServerFn(verificarCompra);
   const navigate = useNavigate();
   const [correo, setCorreo] = useState("");
   const [error, setError] = useState<string | null>(null);
