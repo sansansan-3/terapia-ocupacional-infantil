@@ -1,7 +1,9 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 import { Sparkles, Loader2 } from "lucide-react";
 import { useAcceso, normalizarCorreo, correoValido } from "@/lib/acceso";
+import { verificarCompra } from "@/lib/acceso.functions";
 
 export const Route = createFileRoute("/acceso")({
   head: () => ({
