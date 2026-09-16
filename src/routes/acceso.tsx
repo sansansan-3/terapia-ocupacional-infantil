@@ -51,6 +51,14 @@ function Acceso() {
     setError(null);
     setEnviando(true);
     try {
+      const { acceso } = await comprobar({ data: { email: limpio } });
+      if (!acceso) {
+        setError(
+          "No encontramos una compra asociada a este correo. Utiliza el mismo correo con el que realizaste la compra.",
+        );
+        setEnviando(false);
+        return;
+      }
       registrarAcceso();
       navigate({ to: "/", replace: true });
     } catch {
