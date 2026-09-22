@@ -14,7 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
-      apps: {
+      "Archivado ( Acceso a una sola app)": {
+        Row: {
+          app_id: string | null
+          created_at: string | null
+          id: string
+          user_id: string | null
+        }
+        Insert: {
+          app_id?: string | null
+          created_at?: string | null
+          id?: string
+          user_id?: string | null
+        }
+        Update: {
+          app_id?: string | null
+          created_at?: string | null
+          id?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_apps_app_id_fkey"
+            columns: ["app_id"]
+            isOneToOne: false
+            referencedRelation: "Archivado (apps)"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      "Archivado (apps)": {
         Row: {
           active: boolean | null
           code: string
@@ -91,35 +120,6 @@ export type Database = {
           product_name?: string
         }
         Relationships: []
-      }
-      user_apps: {
-        Row: {
-          app_id: string | null
-          created_at: string | null
-          id: string
-          user_id: string | null
-        }
-        Insert: {
-          app_id?: string | null
-          created_at?: string | null
-          id?: string
-          user_id?: string | null
-        }
-        Update: {
-          app_id?: string | null
-          created_at?: string | null
-          id?: string
-          user_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "user_apps_app_id_fkey"
-            columns: ["app_id"]
-            isOneToOne: false
-            referencedRelation: "apps"
-            referencedColumns: ["id"]
-          },
-        ]
       }
     }
     Views: {
