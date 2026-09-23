@@ -8,6 +8,9 @@ import { COGNITIVA } from "./cognitiva";
 import { SOCIALIZACION } from "./socializacion";
 import { PERCEPCION } from "./percepcion";
 import { ESCOLARES } from "./escolares";
+import { DINAMICAS_COMPLEMENTARIAS } from "../dinamicas-complementarias";
+
+export { DINAMICAS_COMPLEMENTARIAS };
 
 export const DINAMICAS: Dinamica[] = [
   ...MOTRICIDAD_FINA,
@@ -21,7 +24,13 @@ export const DINAMICAS: Dinamica[] = [
   ...ESCOLARES,
 ];
 
-export const MAPA_DINAMICAS = new Map(DINAMICAS.map((d) => [d.id, d]));
+/** 150 principales + 50 complementarias */
+export const TODAS_LAS_DINAMICAS: Dinamica[] = [...DINAMICAS, ...DINAMICAS_COMPLEMENTARIAS];
+
+/** Mapa de todas (principales y complementarias): favoritos, sesiones y registros */
+export const MAPA_DINAMICAS = new Map(TODAS_LAS_DINAMICAS.map((d) => [d.id, d]));
+
+export const esComplementaria = (d: Dinamica) => d.tipo === "complementaria";
 
 export const HABILIDADES: string[] = Array.from(
   new Set(DINAMICAS.flatMap((d) => d.habilidades)),
