@@ -42,7 +42,7 @@ function escribir(s: Sesion[]) {
   window.dispatchEvent(new Event(EVENTO));
 }
 
-export type BorradorSesion = Omit<Sesion, "id" | "created_at" | "updated_at"> & { id?: string };
+export type BorradorSesion = Omit<Sesion, "id" | "created_at" | "updated_at"> & { id?: string | undefined };
 
 export function useSesiones() {
   const [sesiones, setSesiones] = useState<Sesion[]>([]);
