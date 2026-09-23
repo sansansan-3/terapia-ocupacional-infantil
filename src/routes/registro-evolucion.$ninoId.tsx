@@ -218,7 +218,11 @@ function PerfilNino() {
                     </span>
                   </div>
                   <dl className="space-y-2 text-sm">
-                    <div><dt className="font-semibold text-muted-foreground">Actividad</dt><dd>{din?.titulo ?? "Dinámica no disponible"}</dd></div>
+                    <div><dt className="font-semibold text-muted-foreground">Actividad</dt><dd>{
+                      r.actividades && r.actividades.length > 1 && r.actividades[0] === r.actividad
+                        ? r.actividades.map((id) => MAPA_DINAMICAS.get(id)?.titulo ?? "Dinámica no disponible").join(" · ")
+                        : din?.titulo ?? "Dinámica no disponible"
+                    }</dd></div>
                     {r.objetivo && <div><dt className="font-semibold text-muted-foreground">Objetivo</dt><dd>{r.objetivo}</dd></div>}
                     {r.observaciones && <div><dt className="font-semibold text-muted-foreground">Observaciones</dt><dd className="whitespace-pre-line break-words">{r.observaciones}</dd></div>}
                   </dl>

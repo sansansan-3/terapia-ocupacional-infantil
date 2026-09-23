@@ -15,6 +15,8 @@ import { Route as AcercaDeRouteImport } from './routes/acerca-de'
 import { Route as CategoriasRouteImport } from './routes/categorias'
 import { Route as DinamicasRouteImport } from './routes/dinamicas'
 import { Route as FavoritosRouteImport } from './routes/favoritos'
+import { Route as OrganizadorSesionesIndexRouteImport } from './routes/organizador-sesiones.index'
+import { Route as OrganizadorSesionesSesionIdRouteImport } from './routes/organizador-sesiones.$sesionId'
 import { Route as RegistroEvolucionIndexRouteImport } from './routes/registro-evolucion.index'
 import { Route as RegistroEvolucionNinoIdRouteImport } from './routes/registro-evolucion.$ninoId'
 
@@ -48,6 +50,18 @@ const FavoritosRoute = FavoritosRouteImport.update({
   path: '/favoritos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OrganizadorSesionesIndexRoute =
+  OrganizadorSesionesIndexRouteImport.update({
+    id: '/organizador-sesiones/',
+    path: '/organizador-sesiones/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const OrganizadorSesionesSesionIdRoute =
+  OrganizadorSesionesSesionIdRouteImport.update({
+    id: '/organizador-sesiones/$sesionId',
+    path: '/organizador-sesiones/$sesionId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const RegistroEvolucionIndexRoute = RegistroEvolucionIndexRouteImport.update({
   id: '/registro-evolucion/',
   path: '/registro-evolucion/',
@@ -66,7 +80,9 @@ export interface FileRoutesByFullPath {
   '/categorias': typeof CategoriasRoute
   '/dinamicas': typeof DinamicasRoute
   '/favoritos': typeof FavoritosRoute
+  '/organizador-sesiones/$sesionId': typeof OrganizadorSesionesSesionIdRoute
   '/registro-evolucion/$ninoId': typeof RegistroEvolucionNinoIdRoute
+  '/organizador-sesiones/': typeof OrganizadorSesionesIndexRoute
   '/registro-evolucion/': typeof RegistroEvolucionIndexRoute
 }
 export interface FileRoutesByTo {
@@ -76,7 +92,9 @@ export interface FileRoutesByTo {
   '/categorias': typeof CategoriasRoute
   '/dinamicas': typeof DinamicasRoute
   '/favoritos': typeof FavoritosRoute
+  '/organizador-sesiones/$sesionId': typeof OrganizadorSesionesSesionIdRoute
   '/registro-evolucion/$ninoId': typeof RegistroEvolucionNinoIdRoute
+  '/organizador-sesiones': typeof OrganizadorSesionesIndexRoute
   '/registro-evolucion': typeof RegistroEvolucionIndexRoute
 }
 export interface FileRoutesById {
@@ -87,7 +105,9 @@ export interface FileRoutesById {
   '/categorias': typeof CategoriasRoute
   '/dinamicas': typeof DinamicasRoute
   '/favoritos': typeof FavoritosRoute
+  '/organizador-sesiones/$sesionId': typeof OrganizadorSesionesSesionIdRoute
   '/registro-evolucion/$ninoId': typeof RegistroEvolucionNinoIdRoute
+  '/organizador-sesiones/': typeof OrganizadorSesionesIndexRoute
   '/registro-evolucion/': typeof RegistroEvolucionIndexRoute
 }
 export interface FileRouteTypes {
@@ -99,7 +119,9 @@ export interface FileRouteTypes {
     | '/categorias'
     | '/dinamicas'
     | '/favoritos'
+    | '/organizador-sesiones/$sesionId'
     | '/registro-evolucion/$ninoId'
+    | '/organizador-sesiones/'
     | '/registro-evolucion/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -109,7 +131,9 @@ export interface FileRouteTypes {
     | '/categorias'
     | '/dinamicas'
     | '/favoritos'
+    | '/organizador-sesiones/$sesionId'
     | '/registro-evolucion/$ninoId'
+    | '/organizador-sesiones'
     | '/registro-evolucion'
   id:
     | '__root__'
@@ -119,7 +143,9 @@ export interface FileRouteTypes {
     | '/categorias'
     | '/dinamicas'
     | '/favoritos'
+    | '/organizador-sesiones/$sesionId'
     | '/registro-evolucion/$ninoId'
+    | '/organizador-sesiones/'
     | '/registro-evolucion/'
   fileRoutesById: FileRoutesById
 }
@@ -130,7 +156,9 @@ export interface RootRouteChildren {
   CategoriasRoute: typeof CategoriasRoute
   DinamicasRoute: typeof DinamicasRoute
   FavoritosRoute: typeof FavoritosRoute
+  OrganizadorSesionesSesionIdRoute: typeof OrganizadorSesionesSesionIdRoute
   RegistroEvolucionNinoIdRoute: typeof RegistroEvolucionNinoIdRoute
+  OrganizadorSesionesIndexRoute: typeof OrganizadorSesionesIndexRoute
   RegistroEvolucionIndexRoute: typeof RegistroEvolucionIndexRoute
 }
 
@@ -178,6 +206,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FavoritosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/organizador-sesiones/': {
+      id: '/organizador-sesiones/'
+      path: '/organizador-sesiones'
+      fullPath: '/organizador-sesiones/'
+      preLoaderRoute: typeof OrganizadorSesionesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/organizador-sesiones/$sesionId': {
+      id: '/organizador-sesiones/$sesionId'
+      path: '/organizador-sesiones/$sesionId'
+      fullPath: '/organizador-sesiones/$sesionId'
+      preLoaderRoute: typeof OrganizadorSesionesSesionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/registro-evolucion/': {
       id: '/registro-evolucion/'
       path: '/registro-evolucion'
@@ -202,7 +244,9 @@ const rootRouteChildren: RootRouteChildren = {
   CategoriasRoute: CategoriasRoute,
   DinamicasRoute: DinamicasRoute,
   FavoritosRoute: FavoritosRoute,
+  OrganizadorSesionesSesionIdRoute: OrganizadorSesionesSesionIdRoute,
   RegistroEvolucionNinoIdRoute: RegistroEvolucionNinoIdRoute,
+  OrganizadorSesionesIndexRoute: OrganizadorSesionesIndexRoute,
   RegistroEvolucionIndexRoute: RegistroEvolucionIndexRoute,
 }
 export const routeTree = rootRouteImport

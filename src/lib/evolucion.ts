@@ -14,6 +14,10 @@ export interface RegistroEvolucion {
   child_id: string;
   fecha: string; // YYYY-MM-DD
   actividad: string; // id de dinámica
+  /** Varias dinámicas cuando el registro proviene del Organizador de sesiones */
+  actividades?: string[];
+  /** Sesión de origen (evita duplicados) */
+  session_id?: string;
   objetivo: string;
   observaciones: string;
   estado: EstadoEvolucion;
