@@ -8,7 +8,7 @@ import { COGNITIVA } from "./cognitiva";
 import { SOCIALIZACION } from "./socializacion";
 import { PERCEPCION } from "./percepcion";
 import { ESCOLARES } from "./escolares";
-import { DINAMICAS_COMPLEMENTARIAS } from "../dinamicas-complementarias";
+import { DINAMICAS_COMPLEMENTARIAS } from "@/data/dinamicas-complementarias";
 
 export { DINAMICAS_COMPLEMENTARIAS };
 
