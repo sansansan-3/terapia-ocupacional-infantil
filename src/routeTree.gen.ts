@@ -15,6 +15,8 @@ import { Route as AcercaDeRouteImport } from './routes/acerca-de'
 import { Route as CategoriasRouteImport } from './routes/categorias'
 import { Route as DinamicasRouteImport } from './routes/dinamicas'
 import { Route as FavoritosRouteImport } from './routes/favoritos'
+import { Route as RegistroEvolucionIndexRouteImport } from './routes/registro-evolucion.index'
+import { Route as RegistroEvolucionNinoIdRouteImport } from './routes/registro-evolucion.$ninoId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +48,16 @@ const FavoritosRoute = FavoritosRouteImport.update({
   path: '/favoritos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RegistroEvolucionIndexRoute = RegistroEvolucionIndexRouteImport.update({
+  id: '/registro-evolucion/',
+  path: '/registro-evolucion/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistroEvolucionNinoIdRoute = RegistroEvolucionNinoIdRouteImport.update({
+  id: '/registro-evolucion/$ninoId',
+  path: '/registro-evolucion/$ninoId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +66,8 @@ export interface FileRoutesByFullPath {
   '/categorias': typeof CategoriasRoute
   '/dinamicas': typeof DinamicasRoute
   '/favoritos': typeof FavoritosRoute
+  '/registro-evolucion/$ninoId': typeof RegistroEvolucionNinoIdRoute
+  '/registro-evolucion/': typeof RegistroEvolucionIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +76,8 @@ export interface FileRoutesByTo {
   '/categorias': typeof CategoriasRoute
   '/dinamicas': typeof DinamicasRoute
   '/favoritos': typeof FavoritosRoute
+  '/registro-evolucion/$ninoId': typeof RegistroEvolucionNinoIdRoute
+  '/registro-evolucion': typeof RegistroEvolucionIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,14 +87,30 @@ export interface FileRoutesById {
   '/categorias': typeof CategoriasRoute
   '/dinamicas': typeof DinamicasRoute
   '/favoritos': typeof FavoritosRoute
+  '/registro-evolucion/$ninoId': typeof RegistroEvolucionNinoIdRoute
+  '/registro-evolucion/': typeof RegistroEvolucionIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/acceso' | '/acerca-de' | '/categorias' | '/dinamicas' | '/favoritos'
+    | '/'
+    | '/acceso'
+    | '/acerca-de'
+    | '/categorias'
+    | '/dinamicas'
+    | '/favoritos'
+    | '/registro-evolucion/$ninoId'
+    | '/registro-evolucion/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    '/' | '/acceso' | '/acerca-de' | '/categorias' | '/dinamicas' | '/favoritos'
+    | '/'
+    | '/acceso'
+    | '/acerca-de'
+    | '/categorias'
+    | '/dinamicas'
+    | '/favoritos'
+    | '/registro-evolucion/$ninoId'
+    | '/registro-evolucion'
   id:
     | '__root__'
     | '/'
@@ -87,6 +119,8 @@ export interface FileRouteTypes {
     | '/categorias'
     | '/dinamicas'
     | '/favoritos'
+    | '/registro-evolucion/$ninoId'
+    | '/registro-evolucion/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -96,6 +130,8 @@ export interface RootRouteChildren {
   CategoriasRoute: typeof CategoriasRoute
   DinamicasRoute: typeof DinamicasRoute
   FavoritosRoute: typeof FavoritosRoute
+  RegistroEvolucionNinoIdRoute: typeof RegistroEvolucionNinoIdRoute
+  RegistroEvolucionIndexRoute: typeof RegistroEvolucionIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -142,6 +178,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FavoritosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/registro-evolucion/': {
+      id: '/registro-evolucion/'
+      path: '/registro-evolucion'
+      fullPath: '/registro-evolucion/'
+      preLoaderRoute: typeof RegistroEvolucionIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/registro-evolucion/$ninoId': {
+      id: '/registro-evolucion/$ninoId'
+      path: '/registro-evolucion/$ninoId'
+      fullPath: '/registro-evolucion/$ninoId'
+      preLoaderRoute: typeof RegistroEvolucionNinoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -152,6 +202,8 @@ const rootRouteChildren: RootRouteChildren = {
   CategoriasRoute: CategoriasRoute,
   DinamicasRoute: DinamicasRoute,
   FavoritosRoute: FavoritosRoute,
+  RegistroEvolucionNinoIdRoute: RegistroEvolucionNinoIdRoute,
+  RegistroEvolucionIndexRoute: RegistroEvolucionIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
