@@ -16,6 +16,7 @@ import { Route as CategoriasRouteImport } from './routes/categorias'
 import { Route as DinamicasRouteImport } from './routes/dinamicas'
 import { Route as DinamicasComplementariasRouteImport } from './routes/dinamicas-complementarias'
 import { Route as FavoritosRouteImport } from './routes/favoritos'
+import { Route as GuiaComunicacionFamiliasRouteImport } from './routes/guia-comunicacion-familias'
 import { Route as OrganizadorSesionesIndexRouteImport } from './routes/organizador-sesiones.index'
 import { Route as OrganizadorSesionesSesionIdRouteImport } from './routes/organizador-sesiones.$sesionId'
 import { Route as RegistroEvolucionIndexRouteImport } from './routes/registro-evolucion.index'
@@ -57,6 +58,12 @@ const FavoritosRoute = FavoritosRouteImport.update({
   path: '/favoritos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuiaComunicacionFamiliasRoute =
+  GuiaComunicacionFamiliasRouteImport.update({
+    id: '/guia-comunicacion-familias',
+    path: '/guia-comunicacion-familias',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const OrganizadorSesionesIndexRoute =
   OrganizadorSesionesIndexRouteImport.update({
     id: '/organizador-sesiones/',
@@ -88,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/dinamicas': typeof DinamicasRoute
   '/dinamicas-complementarias': typeof DinamicasComplementariasRoute
   '/favoritos': typeof FavoritosRoute
+  '/guia-comunicacion-familias': typeof GuiaComunicacionFamiliasRoute
   '/organizador-sesiones/$sesionId': typeof OrganizadorSesionesSesionIdRoute
   '/registro-evolucion/$ninoId': typeof RegistroEvolucionNinoIdRoute
   '/organizador-sesiones/': typeof OrganizadorSesionesIndexRoute
@@ -101,6 +109,7 @@ export interface FileRoutesByTo {
   '/dinamicas': typeof DinamicasRoute
   '/dinamicas-complementarias': typeof DinamicasComplementariasRoute
   '/favoritos': typeof FavoritosRoute
+  '/guia-comunicacion-familias': typeof GuiaComunicacionFamiliasRoute
   '/organizador-sesiones/$sesionId': typeof OrganizadorSesionesSesionIdRoute
   '/registro-evolucion/$ninoId': typeof RegistroEvolucionNinoIdRoute
   '/organizador-sesiones': typeof OrganizadorSesionesIndexRoute
@@ -115,6 +124,7 @@ export interface FileRoutesById {
   '/dinamicas': typeof DinamicasRoute
   '/dinamicas-complementarias': typeof DinamicasComplementariasRoute
   '/favoritos': typeof FavoritosRoute
+  '/guia-comunicacion-familias': typeof GuiaComunicacionFamiliasRoute
   '/organizador-sesiones/$sesionId': typeof OrganizadorSesionesSesionIdRoute
   '/registro-evolucion/$ninoId': typeof RegistroEvolucionNinoIdRoute
   '/organizador-sesiones/': typeof OrganizadorSesionesIndexRoute
@@ -130,6 +140,7 @@ export interface FileRouteTypes {
     | '/dinamicas'
     | '/dinamicas-complementarias'
     | '/favoritos'
+    | '/guia-comunicacion-familias'
     | '/organizador-sesiones/$sesionId'
     | '/registro-evolucion/$ninoId'
     | '/organizador-sesiones/'
@@ -143,6 +154,7 @@ export interface FileRouteTypes {
     | '/dinamicas'
     | '/dinamicas-complementarias'
     | '/favoritos'
+    | '/guia-comunicacion-familias'
     | '/organizador-sesiones/$sesionId'
     | '/registro-evolucion/$ninoId'
     | '/organizador-sesiones'
@@ -156,6 +168,7 @@ export interface FileRouteTypes {
     | '/dinamicas'
     | '/dinamicas-complementarias'
     | '/favoritos'
+    | '/guia-comunicacion-familias'
     | '/organizador-sesiones/$sesionId'
     | '/registro-evolucion/$ninoId'
     | '/organizador-sesiones/'
@@ -170,6 +183,7 @@ export interface RootRouteChildren {
   DinamicasRoute: typeof DinamicasRoute
   DinamicasComplementariasRoute: typeof DinamicasComplementariasRoute
   FavoritosRoute: typeof FavoritosRoute
+  GuiaComunicacionFamiliasRoute: typeof GuiaComunicacionFamiliasRoute
   OrganizadorSesionesSesionIdRoute: typeof OrganizadorSesionesSesionIdRoute
   RegistroEvolucionNinoIdRoute: typeof RegistroEvolucionNinoIdRoute
   OrganizadorSesionesIndexRoute: typeof OrganizadorSesionesIndexRoute
@@ -227,6 +241,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FavoritosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guia-comunicacion-familias': {
+      id: '/guia-comunicacion-familias'
+      path: '/guia-comunicacion-familias'
+      fullPath: '/guia-comunicacion-familias'
+      preLoaderRoute: typeof GuiaComunicacionFamiliasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/organizador-sesiones/': {
       id: '/organizador-sesiones/'
       path: '/organizador-sesiones'
@@ -266,6 +287,7 @@ const rootRouteChildren: RootRouteChildren = {
   DinamicasRoute: DinamicasRoute,
   DinamicasComplementariasRoute: DinamicasComplementariasRoute,
   FavoritosRoute: FavoritosRoute,
+  GuiaComunicacionFamiliasRoute: GuiaComunicacionFamiliasRoute,
   OrganizadorSesionesSesionIdRoute: OrganizadorSesionesSesionIdRoute,
   RegistroEvolucionNinoIdRoute: RegistroEvolucionNinoIdRoute,
   OrganizadorSesionesIndexRoute: OrganizadorSesionesIndexRoute,
