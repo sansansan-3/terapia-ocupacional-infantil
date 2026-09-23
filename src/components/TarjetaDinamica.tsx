@@ -54,6 +54,9 @@ export const TarjetaDinamica = forwardRef<HTMLButtonElement, Props>(function Tar
           <span className="truncate">{categoria?.nombre}</span>
         </span>
 
+        {dinamica.tipo === "complementaria" && (
+          <span className="mt-2 inline-flex items-center gap-1 rounded-full bg-accent px-2.5 py-0.5 text-xs font-bold text-accent-foreground">⭐ Complementaria</span>
+        )}
         <h3 className="mt-3 pr-10 text-lg font-semibold leading-snug">{dinamica.titulo}</h3>
         <p className="mt-2 line-clamp-3 text-sm text-muted-foreground">{dinamica.objetivo}</p>
 

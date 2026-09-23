@@ -73,6 +73,9 @@ export function FichaDinamica({ dinamica, onCerrar }: Props) {
               <IconoCategoria categoriaId={dinamica.categoriaId} className="h-3.5 w-3.5 shrink-0" />
               <span className="truncate">{categoria?.nombre}</span>
             </span>
+            {dinamica.tipo === "complementaria" && (
+              <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-accent px-2.5 py-0.5 text-xs font-bold text-accent-foreground">⭐ Complementaria</span>
+            )}
             <h2 id="titulo-ficha" className="mt-2 text-xl font-bold sm:text-2xl">
               {dinamica.titulo}
             </h2>
@@ -176,6 +179,16 @@ export function FichaDinamica({ dinamica, onCerrar }: Props) {
                 <h3 className="text-sm font-bold uppercase tracking-wide text-muted-foreground">
                   Consejos y adaptaciones
                 </h3>
+                {dinamica.adaptaciones ? (
+                  <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                    {([["Más fácil", dinamica.adaptaciones.masFacil], ["Más difícil", dinamica.adaptaciones.masDificil]] as const).map(([t, l]) => (
+                      <div key={t} className="rounded-2xl border border-border p-4">
+                        <p className="text-sm font-semibold text-primary">{t}</p>
+                        <ul className="mt-2 space-y-1 text-[15px]">{l.map((x) => <li key={x}>{x}</li>)}</ul>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
                 <ul className="mt-3 space-y-2 text-[15px]">
                   {dinamica.consejos.map((c) => (
                     <li key={c} className="flex gap-2">
@@ -184,6 +197,7 @@ export function FichaDinamica({ dinamica, onCerrar }: Props) {
                     </li>
                   ))}
                 </ul>
+                )}
               </section>
 
               <section className="rounded-2xl bg-muted p-4">

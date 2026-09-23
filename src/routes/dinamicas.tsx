@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useMemo, useRef, useState } from "react";
 import { Search, SlidersHorizontal, ChevronLeft, ChevronRight } from "lucide-react";
-import { DINAMICAS } from "@/data/dinamicas";
+import { DINAMICAS, TODAS_LAS_DINAMICAS, DINAMICAS_COMPLEMENTARIAS } from "@/data/dinamicas";
 import { MAPA_CATEGORIAS } from "@/data/categorias";
 import type { Dinamica } from "@/data/types";
 import { filtrarDinamicas, POR_PAGINA } from "@/lib/filtros";
@@ -18,6 +18,8 @@ interface BusquedaCatalogo {
   hab: string;
   orden: string;
   p: number;
+  /** "" = 150 principales · "todas" = principales + complementarias · "complementarias" */
+  tipo?: string;
 }
 
 export const Route = createFileRoute("/dinamicas")({
@@ -29,6 +31,9 @@ export const Route = createFileRoute("/dinamicas")({
     hab: typeof search["hab"] === "string" ? search["hab"] : "",
     orden: typeof search["orden"] === "string" ? search["orden"] : "titulo-asc",
     p: Number(search["p"]) > 0 ? Number(search["p"]) : 1,
+    ...(search["tipo"] === "todas" || search["tipo"] === "complementarias"
+      ? { tipo: search["tipo"] as string }
+      : {}),
   }),
   head: () => ({
     meta: [
@@ -60,7 +65,11 @@ function PaginaDinamicas() {
   const resultados = useMemo(
     () =>
       filtrarDinamicas(
-        DINAMICAS,
+        busqueda.tipo === "todas"
+          ? TODAS_LAS_DINAMICAS
+          : busqueda.tipo === "complementarias"
+            ? DINAMICAS_COMPLEMENTARIAS
+            : DINAMICAS,
         {
           q: busqueda.q,
           categoria: busqueda.cat,
@@ -87,7 +96,7 @@ function PaginaDinamicas() {
 
   const limpiar = () =>
     navigate({
-      search: { q: "", cat: "", edad: 0, dif: "", hab: "", orden: "titulo-asc", p: 1 },
+      search: { q: "", cat: "", edad: 0, dif: "", hab: "", orden: "titulo-asc", p: 1, ...(busqueda.tipo ? { tipo: busqueda.tipo } : {}) },
       resetScroll: false,
     });
 
@@ -148,6 +157,20 @@ function PaginaDinamicas() {
             />
           </div>
         </label>
+
+        <div className="flex flex-wrap gap-2" role="group" aria-label="Biblioteca">
+          {([["", `Principales (${DINAMICAS.length})`], ["todas", `Todas (${TODAS_LAS_DINAMICAS.length})`], ["complementarias", `⭐ Complementarias (${DINAMICAS_COMPLEMENTARIAS.length})`]] as const).map(([v, t]) => (
+            <button
+              key={v}
+              type="button"
+              aria-pressed={(busqueda.tipo ?? "") === v}
+              onClick={() => navigate({ search: (prev) => { const { tipo: _t, ...resto } = prev; return v ? { ...resto, tipo: v, p: 1 } : { ...resto, p: 1 }; }, resetScroll: false })}
+              className="rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-semibold text-muted-foreground transition-colors aria-pressed:border-primary aria-pressed:bg-primary-soft aria-pressed:text-primary"
+            >
+              {t}
+            </button>
+          ))}
+        </div>
 
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <SlidersHorizontal className="h-4 w-4" aria-hidden="true" />

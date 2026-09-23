@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Home, Sparkles, LayoutGrid, Heart, Info, Search, LogOut, ClipboardList, CalendarCheck } from "lucide-react";
+import { Home, Sparkles, LayoutGrid, Heart, Info, Search, LogOut, ClipboardList, CalendarCheck, Star } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { useFavoritos } from "@/lib/favoritos";
 import { useAcceso } from "@/lib/acceso";
@@ -74,6 +74,13 @@ export function Layout({ children }: { children: ReactNode }) {
             <CalendarCheck className="h-[18px] w-[18px] shrink-0" aria-hidden="true" />
             <span className="truncate">Organizador de sesiones</span>
           </Link>
+          <Link
+            to="/dinamicas-complementarias"
+            className="mt-1 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted data-[status=active]:bg-primary-soft data-[status=active]:text-primary"
+          >
+            <Star className="h-[18px] w-[18px] shrink-0" aria-hidden="true" />
+            <span className="truncate">Dinámicas complementarias</span>
+          </Link>
         </div>
 
 
@@ -133,6 +140,13 @@ export function Layout({ children }: { children: ReactNode }) {
                 className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-border text-muted-foreground transition-colors hover:text-primary data-[status=active]:bg-primary-soft data-[status=active]:text-primary lg:hidden"
               >
                 <CalendarCheck className="h-4 w-4" aria-hidden="true" />
+              </Link>
+              <Link
+                to="/dinamicas-complementarias"
+                aria-label="Dinámicas complementarias (Bono Premium)"
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-border text-muted-foreground transition-colors hover:text-primary data-[status=active]:bg-primary-soft data-[status=active]:text-primary lg:hidden"
+              >
+                <Star className="h-4 w-4" aria-hidden="true" />
               </Link>
               <button
                 type="button"
