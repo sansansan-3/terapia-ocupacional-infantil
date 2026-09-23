@@ -207,7 +207,7 @@ function PerfilNino() {
         ) : (
           <ul className="grid gap-4 md:grid-cols-2">
             {historial.map((r) => {
-              const est = ESTADOS.find((s) => s.id === r.estado) ?? ESTADOS[1];
+              const est = ESTADOS.find((s) => s.id === r.estado) ?? ESTADOS[1]!;
               const din = MAPA_DINAMICAS.get(r.actividad);
               return (
                 <li key={r.id} className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-5 shadow-soft">

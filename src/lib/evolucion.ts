@@ -120,7 +120,7 @@ export function useEvolucion() {
   );
 
   const guardarRegistro = useCallback(
-    (r: Omit<RegistroEvolucion, "id" | "created_at" | "updated_at"> & { id?: string }) => {
+    (r: Omit<RegistroEvolucion, "id" | "created_at" | "updated_at"> & { id?: string | undefined }) => {
       const ahora = new Date().toISOString();
       mutar((d) => {
         if (r.id) {
