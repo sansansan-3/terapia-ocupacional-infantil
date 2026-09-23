@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search, X, Plus, Clock, User } from "lucide-react";
-import { DINAMICAS, MAPA_DINAMICAS } from "@/data/dinamicas";
+import { TODAS_LAS_DINAMICAS as DINAMICAS, MAPA_DINAMICAS } from "@/data/dinamicas";
 import { CATEGORIAS, MAPA_CATEGORIAS } from "@/data/categorias";
 import { useEvolucion, hoyISO } from "@/lib/evolucion";
 import { ESTADOS_SESION, type BorradorSesion, type Sesion } from "@/lib/sesiones";
@@ -172,7 +172,7 @@ export function FormularioSesion({
               <label className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 hover:bg-muted has-[:checked]:bg-primary-soft">
                 <input type="checkbox" checked={actividades.includes(d.id)} onChange={() => alternar(d.id)} className="h-5 w-5 shrink-0 accent-[var(--primary)]" />
                 <span className="min-w-0 flex-1">
-                  <span className="block font-medium">{d.titulo}</span>
+                  <span className="block font-medium">{d.tipo === "complementaria" && "⭐ "}{d.titulo}{d.tipo === "complementaria" && <span className="font-normal text-primary"> (Complementaria)</span>}</span>
                   <span className="block text-xs text-muted-foreground">{MAPA_CATEGORIAS[d.categoriaId]?.nombre} · {d.duracion} min</span>
                 </span>
               </label>
@@ -188,7 +188,7 @@ export function FormularioSesion({
               return (
                 <li key={id} className="rounded-xl border border-primary/30 bg-primary-soft/50 p-4 text-sm">
                   <div className="flex items-start justify-between gap-2">
-                    <p className="font-display font-bold">{d.titulo}</p>
+                    <p className="font-display font-bold">{d.tipo === "complementaria" && "⭐ "}{d.titulo}</p>
                     <button type="button" onClick={() => alternar(id)} aria-label={`Quitar ${d.titulo}`} className="grid h-8 w-8 shrink-0 place-items-center rounded-lg hover:bg-muted">
                       <X className="h-4 w-4" aria-hidden="true" />
                     </button>
@@ -196,7 +196,8 @@ export function FormularioSesion({
                   <p className="mt-1 text-muted-foreground">
                     {MAPA_CATEGORIAS[d.categoriaId]?.nombre} · <Clock className="inline h-3.5 w-3.5" aria-hidden="true" /> {d.duracion} min · {d.dificultad} · {d.edadMin}–{d.edadMax} años
                   </p>
-                  <p className="mt-2"><span className="font-semibold">Materiales:</span> {d.materiales.join(", ")}</p>
+                  <p className="mt-2"><span className="font-semibold">Objetivo:</span> {d.objetivo}</p>
+                  <p className="mt-1"><span className="font-semibold">Materiales:</span> {d.materiales.join(", ")}</p>
                 </li>
               );
             })}

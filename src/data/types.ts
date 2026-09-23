@@ -36,4 +36,8 @@ export interface Dinamica {
   observaciones: string;
   precauciones?: string;
   destacada?: boolean;
+  /** Principal (150) o complementaria (bono premium). Sin valor = principal */
+  tipo?: "principal" | "complementaria";
+  /** Adaptaciones para facilitar o aumentar la dificultad */
+  adaptaciones?: { masFacil: string[]; masDificil: string[] };
 }

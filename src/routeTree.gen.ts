@@ -14,6 +14,7 @@ import { Route as AccesoRouteImport } from './routes/acceso'
 import { Route as AcercaDeRouteImport } from './routes/acerca-de'
 import { Route as CategoriasRouteImport } from './routes/categorias'
 import { Route as DinamicasRouteImport } from './routes/dinamicas'
+import { Route as DinamicasComplementariasRouteImport } from './routes/dinamicas-complementarias'
 import { Route as FavoritosRouteImport } from './routes/favoritos'
 import { Route as OrganizadorSesionesIndexRouteImport } from './routes/organizador-sesiones.index'
 import { Route as OrganizadorSesionesSesionIdRouteImport } from './routes/organizador-sesiones.$sesionId'
@@ -45,6 +46,12 @@ const DinamicasRoute = DinamicasRouteImport.update({
   path: '/dinamicas',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DinamicasComplementariasRoute =
+  DinamicasComplementariasRouteImport.update({
+    id: '/dinamicas-complementarias',
+    path: '/dinamicas-complementarias',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const FavoritosRoute = FavoritosRouteImport.update({
   id: '/favoritos',
   path: '/favoritos',
@@ -79,6 +86,7 @@ export interface FileRoutesByFullPath {
   '/acerca-de': typeof AcercaDeRoute
   '/categorias': typeof CategoriasRoute
   '/dinamicas': typeof DinamicasRoute
+  '/dinamicas-complementarias': typeof DinamicasComplementariasRoute
   '/favoritos': typeof FavoritosRoute
   '/organizador-sesiones/$sesionId': typeof OrganizadorSesionesSesionIdRoute
   '/registro-evolucion/$ninoId': typeof RegistroEvolucionNinoIdRoute
@@ -91,6 +99,7 @@ export interface FileRoutesByTo {
   '/acerca-de': typeof AcercaDeRoute
   '/categorias': typeof CategoriasRoute
   '/dinamicas': typeof DinamicasRoute
+  '/dinamicas-complementarias': typeof DinamicasComplementariasRoute
   '/favoritos': typeof FavoritosRoute
   '/organizador-sesiones/$sesionId': typeof OrganizadorSesionesSesionIdRoute
   '/registro-evolucion/$ninoId': typeof RegistroEvolucionNinoIdRoute
@@ -104,6 +113,7 @@ export interface FileRoutesById {
   '/acerca-de': typeof AcercaDeRoute
   '/categorias': typeof CategoriasRoute
   '/dinamicas': typeof DinamicasRoute
+  '/dinamicas-complementarias': typeof DinamicasComplementariasRoute
   '/favoritos': typeof FavoritosRoute
   '/organizador-sesiones/$sesionId': typeof OrganizadorSesionesSesionIdRoute
   '/registro-evolucion/$ninoId': typeof RegistroEvolucionNinoIdRoute
@@ -118,6 +128,7 @@ export interface FileRouteTypes {
     | '/acerca-de'
     | '/categorias'
     | '/dinamicas'
+    | '/dinamicas-complementarias'
     | '/favoritos'
     | '/organizador-sesiones/$sesionId'
     | '/registro-evolucion/$ninoId'
@@ -130,6 +141,7 @@ export interface FileRouteTypes {
     | '/acerca-de'
     | '/categorias'
     | '/dinamicas'
+    | '/dinamicas-complementarias'
     | '/favoritos'
     | '/organizador-sesiones/$sesionId'
     | '/registro-evolucion/$ninoId'
@@ -142,6 +154,7 @@ export interface FileRouteTypes {
     | '/acerca-de'
     | '/categorias'
     | '/dinamicas'
+    | '/dinamicas-complementarias'
     | '/favoritos'
     | '/organizador-sesiones/$sesionId'
     | '/registro-evolucion/$ninoId'
@@ -155,6 +168,7 @@ export interface RootRouteChildren {
   AcercaDeRoute: typeof AcercaDeRoute
   CategoriasRoute: typeof CategoriasRoute
   DinamicasRoute: typeof DinamicasRoute
+  DinamicasComplementariasRoute: typeof DinamicasComplementariasRoute
   FavoritosRoute: typeof FavoritosRoute
   OrganizadorSesionesSesionIdRoute: typeof OrganizadorSesionesSesionIdRoute
   RegistroEvolucionNinoIdRoute: typeof RegistroEvolucionNinoIdRoute
@@ -197,6 +211,13 @@ declare module '@tanstack/react-router' {
       path: '/dinamicas'
       fullPath: '/dinamicas'
       preLoaderRoute: typeof DinamicasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dinamicas-complementarias': {
+      id: '/dinamicas-complementarias'
+      path: '/dinamicas-complementarias'
+      fullPath: '/dinamicas-complementarias'
+      preLoaderRoute: typeof DinamicasComplementariasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/favoritos': {
@@ -243,6 +264,7 @@ const rootRouteChildren: RootRouteChildren = {
   AcercaDeRoute: AcercaDeRoute,
   CategoriasRoute: CategoriasRoute,
   DinamicasRoute: DinamicasRoute,
+  DinamicasComplementariasRoute: DinamicasComplementariasRoute,
   FavoritosRoute: FavoritosRoute,
   OrganizadorSesionesSesionIdRoute: OrganizadorSesionesSesionIdRoute,
   RegistroEvolucionNinoIdRoute: RegistroEvolucionNinoIdRoute,

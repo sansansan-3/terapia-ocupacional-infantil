@@ -9,7 +9,7 @@ import {
   type EstadoEvolucion,
   type RegistroEvolucion,
 } from "@/lib/evolucion";
-import { DINAMICAS, MAPA_DINAMICAS } from "@/data/dinamicas";
+import { TODAS_LAS_DINAMICAS as DINAMICAS, MAPA_DINAMICAS } from "@/data/dinamicas";
 
 export const Route = createFileRoute("/registro-evolucion/$ninoId")({
   head: () => ({
