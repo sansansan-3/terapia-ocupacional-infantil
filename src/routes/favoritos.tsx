@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { Heart } from "lucide-react";
 import { MAPA_DINAMICAS } from "@/data/dinamicas";
 import type { Dinamica } from "@/data/types";
@@ -41,6 +41,7 @@ function PaginaFavoritos() {
   const mensajes = favoritos
     .map((id) => MAPA_RECURSOS.get(id))
     .filter((r): r is RecursoComunicacion => Boolean(r));
+  const cerrarMensaje = useCallback(() => setMensaje(null), []);
   const vacio = dinamicas.length === 0 && mensajes.length === 0;
 
   const cerrarFicha = () => {
@@ -100,7 +101,7 @@ function PaginaFavoritos() {
           </div>
         </section>
       )}
-      {mensaje && <DetalleRecurso recurso={mensaje} onCerrar={() => setMensaje(null)} />}
+      {mensaje && <DetalleRecurso recurso={mensaje} onCerrar={cerrarMensaje} />}
 
       {abierta && <FichaDinamica dinamica={abierta} onCerrar={cerrarFicha} />}
     </div>
